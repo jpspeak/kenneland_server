@@ -6,7 +6,7 @@ const config = {
   app: {
     url: process.env.APP_URL || "http://localhost:5000",
     hostname: process.env.APP_HOSTNAME,
-    port: process.env.APP_PORT || "5000"
+    port: process.env.PORT || "5000"
   },
   allowedOrigin: process.env.ALLOWED_ORIGIN || "http://localhost:3000",
   mail: {
