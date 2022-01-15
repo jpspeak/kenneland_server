@@ -10,10 +10,10 @@ const seedDb = async () => {
     await mongoose.connect(config.database.mongodb.uri);
 
     console.log("Seeding database...");
-    await seedUserKennel();
     await seedDogBreed();
-    await seedStud();
-    await seedForSale();
+    // await seedUserKennel();
+    // await seedStud();
+    // await seedForSale();
 
     console.log("Seeding successful.");
     await mongoose.disconnect();
