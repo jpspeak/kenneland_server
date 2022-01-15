@@ -3,7 +3,7 @@ import asyncHandler from "../helpers/async-wrapper";
 
 const validateFacebookLoginInput = asyncHandler(async (req, _, next) => {
   const schema = Yup.object().shape({
-    fbUserAccessToken: Yup.string()
+    accessToken: Yup.string()
       .label("Access Token")
       .required()
   });

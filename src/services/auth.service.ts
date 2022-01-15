@@ -6,6 +6,7 @@ import { createAccessToken, createRefreshToken } from "../utils/token";
 import bcrypt from "bcrypt";
 import { OAuth2Client } from "google-auth-library";
 import config from "../config";
+import "isomorphic-fetch";
 
 type RegisterInput = { email: string; firstName: string; lastName: string; password: string };
 type IGoogleUser = {
@@ -67,9 +68,17 @@ const register = async (registerInput: RegisterInput) => {
   return { user, accessToken, refreshToken };
 };
 
-const facebookLogin = async (fbUserAccessToken: string) => {
+const facebookLogin = async (_accessToken: string) => {
   //Fetch user's facebook data
-  const fbUser = await fetch(`https://graph.facebook.com/me?fields=email,first_name,last_name,picture&access_token=${fbUserAccessToken}`).then(res => res.json());
+
+  interface IFbUser {
+    email: string;
+    first_name: string;
+    last_name: string;
+    picture: { data: { url: string } };
+  }
+
+  const fbUser = await fetch(`https://graph.facebook.com/me?fields=email,first_name,last_name,picture&access_token=${_accessToken}`).then(res => res.json() as Promise<IFbUser>);
 
   //Find or create user
   let user = await User.findOne({ email: fbUser.email });

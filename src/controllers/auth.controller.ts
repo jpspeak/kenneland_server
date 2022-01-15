@@ -25,8 +25,7 @@ const register = asyncHandler(async (req, res) => {
 
 // Facebook login
 const facebookLogin = asyncHandler(async (req, res) => {
-  const { fbUserAccessToken } = req.body;
-  const { user, accessToken, refreshToken } = await AuthService.facebookLogin(fbUserAccessToken);
+  const { user, accessToken, refreshToken } = await AuthService.facebookLogin(req.body.accessToken);
 
   res.status(200).json(response(accessToken, refreshToken, user));
 });

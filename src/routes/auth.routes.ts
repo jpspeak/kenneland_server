@@ -8,4 +8,5 @@ router.post("/register", AuthValidation.validateRegisterInput, AuthController.re
 router.post("/logout", AuthValidation.validateLogoutInput, AuthController.logout);
 
 router.post("/google", AuthValidation.validateGoogleLoginInput, AuthController.googleLogin);
+router.post("/facebook", AuthValidation.validateFacebookLoginInput, AuthController.facebookLogin);
 export default router;
