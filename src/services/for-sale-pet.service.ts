@@ -42,7 +42,8 @@ const getAll = async (urlQuery: any, perPage: number = 1) => {
     { $match: query },
     { $limit: perPage + 1 },
     { $lookup: { from: "kennels", localField: "kennel", foreignField: "_id", as: "kennel" } },
-    { $unwind: "$kennel" }
+    { $unwind: "$kennel" },
+    { $sort: { createdAt: -1 } }
   ]);
   const results = forSalePets.length > perPage ? forSalePets.slice(0, -1) : forSalePets;
   const cursor = forSalePets.length > perPage ? forSalePets[forSalePets.length - 2]?._id : forSalePets[forSalePets.length - 1]?._id;
