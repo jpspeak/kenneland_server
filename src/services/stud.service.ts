@@ -165,7 +165,8 @@ const getByKennelId = async (kennelId: string, user?: IUser) => {
   const studs = await Stud.aggregate([
     { $match: { kennel: new mongoose.Types.ObjectId(kennelId) } },
     { $lookup: { from: "kennels", localField: "kennel", foreignField: "_id", as: "kennel" } },
-    { $unwind: "$kennel" }
+    { $unwind: "$kennel" },
+    { $sort: { createdAt: -1 } }
   ]);
 
   return studs;
