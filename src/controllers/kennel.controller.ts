@@ -15,7 +15,7 @@ const getOne = asyncWrapper(async (req, res) => {
 });
 
 const getYouMightLike = asyncWrapper(async (req, res) => {
-  const kennel = await KennelService.getYouMightLike(req.query, 1);
+  const kennel = await KennelService.getYouMightLike(req.query, 20);
   return res.json(kennel);
 });
 
